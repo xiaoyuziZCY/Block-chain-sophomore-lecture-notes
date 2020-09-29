@@ -1,0 +1,49 @@
+9月27日晚上：
+
+1、beego框架的安装，环境搭建（bee环境），项目的创建，初始化运行
+
+2、GET、POST请求以及数据解析
+	GET: postman params拼接参数
+	POST: 将请求数据放在请求体body中
+		① form表单形式：
+		② JSON数据格式：
+
+3、请求的数据格式返回：
+	① c.Ctx.ResponseWriter.Write([]byte)
+	② c.Ctx.WriteString
+	③ JSON格式的返回：
+
+
+4、项目的配置选项及选项的读取：beegoAppConfig类型，包含String、Int、Bool等函数
+	   beego.AppConfig变量
+
+
+5、链接数据库
+	函数调用：sql.Open函数，该函数有两个参数
+	参数：① 数据库驱动, mysql，oracle，sql server...
+		 ② 数据库链接字符串：
+		 	格式：   user:password@tcp(ip:3306)/db_name?charset=字符编码
+    要求：数据库创建时，使用utf8编码作为默认的编码.
+
+6、panic：使程序进入一种恐慌状态，程序会终止执行
+
+
+7、代码封装：可以将重复的代码或者功能相对比较独立的代码，进行封装，以函数的形式进行封装，变成一个代码块或者是功能包，供使用者进行调用。
+
+
+8、开发一个功能：用户信息的注册
+	用户信息：name、birthday、address、password
+	请求类型：POST类型，post类型会把数据放在body，数据量没有限制
+	请求接口（路径）：register 注册
+		/register
+	使用json格式提交数据：
+		{
+			"name":"狗蛋儿",
+			"birthday":"20001001",
+			"address":"江西省南昌市",
+			"password":"123456"
+		}
+
+
+
+

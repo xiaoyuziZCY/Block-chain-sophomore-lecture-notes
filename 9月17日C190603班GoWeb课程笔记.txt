@@ -1,0 +1,10 @@
+9月17日C190603班GoWeb课程笔记
+
+1、比特币系统设计：
+Bitcoin网站：http://www.bitcoin.org/
+Bitcoin源码仓库：https://github.com/bitcoin/bitcoin
+安装文件：https://bitcoincore.org/bin/bitcoin-core-0.20.1/
+2、单词：
+	release：释放，打开，发出
+	available：可利用的，可使用的
+

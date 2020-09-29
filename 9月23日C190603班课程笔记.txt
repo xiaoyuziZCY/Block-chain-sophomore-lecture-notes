@@ -1,0 +1,17 @@
+9月23日C190603班课程笔记
+
+1、Beego框架的执行流程：
+	① main.go的main是程序的执行入口
+	② /conf/app.conf文件，可以进行相关的配置
+	③ import包引入语句： _ /ProjectName/router
+	④ init函数在前，main函数在后
+	⑤ router.go文件中，有一个init函数
+		beego.Router("/",&controllers.MainController{})
+	⑥ controller中, 结构体MainController， Get方法
+	⑦ HTTP请求有多种：GET、POST，浏览器默认执行的是GET，会自动执行MainController中的对应发方法。
+2、Postman：接口测试工具
+	HTTP请求类型：GET、POST、DELETE、PUT、HEAD等
+	postman：用于模拟http各种类型的请求的一个工具。浏览器插件。
+	chrome浏览器插件，网上商店。
+3、MVC：model、view、controller是一种软件开发的架构思想。
+	
