@@ -1,0 +1,92 @@
+2020年11月10日课程笔记
+@author:于洪伟
+
+1、beego框架的介绍：
+	框架：为了提高项目的开发效率和编码速度，让程序开发人员将更多的精力聚焦于业务上，抽象总结除了一套完整的项目开发流程，极大的减少开发人员编写基础代码的时间，使项目开发具备可复制，高效率的特点。类似这样一套完整的体系，称之为框架。
+	beego框架：mvc架构，model，view，controller
+		model：模型，模板，-> 结构体定义
+		view：视图,前端页面，模板文件
+		controller：控制层，主要控制业务的逻辑。
+	两种编程思想：面向过程、面向对象
+
+2、beego的安装：
+	① go get github.com/astaxie/beego 
+	② git clone github.com/astaxie/beego 
+	前提：安装git软件
+
+3、git软件：git是一款代码管理工具。svn
+	talk is cheap, show me code。别逼逼，放码过来
+   github：全世界最大的代码开源网站，允许开发者注册成为用户，并创建自己的仓库，然后开源自己的代码
+
+4、git命令：
+	原理： 分为远端和本地两个仓库，本地称之为暂存区，本地和远端可以通信
+	git init：初始化仓库, 生成一个.git隐藏文件夹
+	git status：查看仓库的状态，如果有的新内容，新内容为红色
+	git add ：追踪某个文件, 红色 -> 绿色。git add . 表示追踪全部
+	git commit：将追踪的文件提交到本地暂存区, -m 添加注释，注释要详细说明
+
+	远端仓库的操作： git remote xx
+		添加远端仓库：git remote add 远端仓库名 远端仓库的地址
+		远端仓库重命名：git remote rename old new 
+		删除远端仓库：git remote remove 仓库名称
+
+	git push 分支名：推送某个分支到远端仓库
+	git pull 远端分支  本地分支：从远端拉取某个分支
+
+	首次使用git需要配置：
+		git config global user.email  xxx
+		git config global user.name   xx
+
+5、beego项目的管理：bee工具，astaxie提供的用于管理beego项目的一个简单的工具
+	bee工具的使用：
+		bee version：查看go语言、beego框架、bee工具的版本号
+		bee new： 创建一个新的beego项目
+		bee run： 运行beego项目
+		bee pack：将一个beego项目进行打包
+6、beego项目的目录结构：
+	conf：项目的配置目录, 默认有一个app.conf文件
+	controller：控制层, 用于编写业务逻辑代码,  相当于大脑中枢
+	models：模型，主要是存放定义的结构体实体。
+	routers：路由，主要用于拦截请求，并根据接口的唯一匹配规则，进行请求的分发，将请求分发至控制层进行逻辑处理
+	static：存放项目中使用到的静态资源文件
+	test：测试
+	views：存放前端页面,主要是html、tpl模板文件等
+	main.go：main包，main函数入口
+7、beego程序的执行流程：
+	① main函数所在文件 -> main.go， 从上向下执行: pakcage main
+	② import 导包代码块：先执行导包的代码
+		2.1 _ "xxx"：执行导包中的init函数
+	③ main.go程序中的main函数
+	④ beego.Run()：
+			1、解析用户可选项配置
+			2、读取app.conf文件，解析用户的配置，将解析到的数据放到beeo.AppConf
+			3、启动http的端口监听，即一个web服务
+8、网络请求的处理流程：
+	① 客户端发起请求
+	② 请求被发送到后台服务器
+	③ router.go文件中的init的代码会将请求进行拦截，并匹配，然后指定特定的controller进行处理
+	④ 转入到controller执行：
+		规范： type CustomController struct{
+					beego.Controller
+			  }
+		处理方法的调用规则：根据请求的类型自动匹配和调用controller中对应的方法
+
+		请求的类型：GET、POST、PUT、DELETE、HEAD、OPTION
+		请求的类型  ----> controller方法名
+		  GET          func (c *Controller) Get(){}
+		  POST         func (c *Controller) Post(){}
+		  ...
+	⑤ 业务流程逻辑处理完毕，将请求的响应返回给前端客户端：
+		字节：c.Ctx.ResponseWrite.Write([]byte)
+		字符串：c.Ctx.WriteString
+		页面：c.TplName、c.Data[filed] = value 携带数据
+		json：
+			c.Data["json"] = value
+			c.ServeJSON()/c.ServerJSONP()
+		xml：
+			c.Data["xml"] = value
+			c.ServeXML()
+
+
+
+

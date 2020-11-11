@@ -1,0 +1,96 @@
+2020年11月10日晚上课程笔记
+@author:于洪伟
+
+1、beego入门：
+	安装
+2、git、github区别
+3、git命令
+4、beego项目管理：bee
+5、beego项目目录结构：
+6、beego项目的执行流程：
+	init -> main
+	beego.Run: 
+7、网络请求的处理流程：
+	前端 -> 后端 -> router拦截 -> 分到controller -> 处理 -> 响应
+8、请求的响应：字节、字符串、页面、json、xml
+9、controller处理的规则：根据请求类型自动匹配
+	GET请求：
+		str := c.GetString(key)，key表示字段的名称
+		i, err := c.GetInt(key)，根据字段key获取对应的数据
+	POST请求：
+		c.Ctx.Request.FormValue(key), 根据key获取字段对应的数据
+		err := c.ParseForm(&struct)
+		type A  struct: 需要给A的字段添加form标签
+
+		文件： 
+			file, header, err := c.GetFile(key)：根据key获取前端提交的文件
+		header： fileName, fileSize
+		使用：
+			fileName用于判断文件的类型
+				jpg,png：① 使用strings包中的切割 ② 判断是否以特定的类型结尾
+			fileSize用于判断文件的大小
+				1M = 1024KB  1kb = 1024bit
+
+		文件的存储：
+			① beego的api：c.SaveToFile(from,to),from和to均为string，路径
+			② io.Copy(dst, src) int64：将src的内容复制到dst中，返回复制多少字节内容
+				src：io.Reader, 读者
+				dst：io.Writer, 写者
+
+				实例化一个读者：bytes.NewReader()
+			③ 缓冲区：bytes.Buffer
+				buff := new(bytes.Buffer)
+				向缓冲区中写入内容：buff.Write(。。。)
+				从缓冲区中一次性刷出数据：buff.Bytes()
+
+10、os包
+	os.Open(dir)：打开某个目录，dir为目录
+	os.OpenFile(path, flag, perm):
+			path：文件的路径
+			flag： O_RDONLY, O_WRONLY..
+			perm：文件的权限
+
+	文件的权限：对文件的操作有三种：r、w、x，d为directory目录
+	使用三组权限表示法来表示一个文件的权限：
+		文件所有者用户对文件的操作权限
+		文件所有者所在组用户对文件的操作权限
+		其他用户对文件的操作权限
+
+11、大整数：big.Int，结构体定义
+	实例化一个大整数：
+		a、 new(big.Int)
+		b、 big.NewInt(0)
+
+	大整数的操作：两个大整数分别为m,n
+		比较： m.Cmp(n), 三种返回值：-1,0,1，分别为小于，等于，大于
+		移位：m.Lsh(m,s),将大整数m左移s位，m会指数倍放大
+			 m.Rsh(m,s),将大整数m右移s位，m会指数倍缩小
+		算术运算：Add，Sub，Mul，Mod...
+
+	如何将[]byte转换为大整数big.int：
+		c := new(big.Int)
+		c.SetBytes([]byte)
+
+	大整数转换为[]byte：c.Bytes()
+
+12、数据库的操作：
+	连接数据库：0️⃣ 创建数据库 ① app.conf配置 ② 拼接数据库链接串:
+		连接串格式： user:password@tcp(ip:port)/db_Name?charset=编码
+	③ import导入驱动包,sql.Open(数据库驱动名称，链接串)
+
+	db := *sql.DB
+	数据库的操作：
+		查询：
+			db.QueryRow：单行，返回*ROW
+
+			db.Query：多行, *ROWS
+			sql：select colume1，colume2, .. from table where xxxx 
+		执行：db.Exec, execute，返回*Result -> RowsAffected() -> int64,err
+			新增sql：insert into table(colume1,colume2,...) values(...)
+			修改sql：update table set colume1 = ?, colume2 = ? where 。。
+			删除sql：delete from table where colume1 = ?....
+
+
+
+
+
