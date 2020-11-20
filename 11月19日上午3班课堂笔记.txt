@@ -1,0 +1,52 @@
+11月19日上午3班课堂笔记
+@author:于洪伟
+
+1、椭圆曲线加密算法：elliptic curve cryptography
+2、椭圆曲线数字签名算法：elliptic curve digital signature algorithm
+3、Go语言实现：ecdsa
+4、应用：
+	0️⃣ curve: elliptic.P56()
+		Curve:抽取共性，定义为接口 
+		p256Curve,p384Curve...：具体的实现，定义为结构体
+	① 私钥的生成: ecdsa.GenerateKey(curve,rand.Reader)
+		ecdsa.PrivateKey
+	② 私钥签名： ecdsa.Sign(pri,data)
+		返回值类型：r,s  *big.Int
+	③ 公钥验签： ecdsa.Verify(pub, r,s, hash)
+		r,s : *big.Int
+
+
+
+
+A:于洪伟
+B:接受者
+
+人的信息:姓名，性别，年龄，身高，体重, 电话号码区号
+{于洪伟 1 18 180 140 010}
+->
+于洪伟118180140010
+① 用特殊符号将数据进行间隔：a性别，b表示年龄，c表示身高，d表示体重，尔表示区号，f表示结束
+② 字段的顺序:姓名，性别，年龄，身高，体重，区号
+于洪伟a1b18c180d140e010f
+
+==>翻译
+
+PEM格式:
+	-----------BEGIN TYPE----------------
+	Headers
+	base64-encoded
+	-----------END TYPE------------------
+DER格式:采用特定的编码规则对数据进行二进制编码
+
+
+
+
+
+
+
+
+
+
+
+
+

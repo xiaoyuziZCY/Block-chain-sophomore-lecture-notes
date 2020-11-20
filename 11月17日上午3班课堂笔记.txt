@@ -1,0 +1,29 @@
+11月17日上午3班课堂笔记
+@author：于洪伟
+
+1、非对称加密算法：RSA、ECC
+	① 准备密钥
+		privateKey, err := rsa.GenerateKey(random, bits)
+
+	  type PrivateKey struct{
+	  	Publickey
+	  	.. 
+	  }
+	② 数据操作：
+		a、加密：公钥加密、私钥解密
+			cipher, err := rsa.EncryptPKCS1v15(random, pub, data)
+			origin, err :=rsa.DecryptPKCS1v15(random, pri, cipher)
+		b、数字签名：私钥签名、公钥验签
+			rsa.SignPKCS1v15(random, priv, hash, hashed)
+				hash: 采用哪种hash函数进行计算
+				hased: 使用特定的hash函数对原文进行计算得到的值
+			rsa.VerifyPKCS1v15(pub, hash, hashed, sign)
+				hash：同私钥签名
+				hashed：同签名
+
+		
+
+
+
+
+
