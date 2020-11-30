@@ -1,0 +1,19 @@
+11月30日上午3班课程笔记
+@author：于洪伟
+
+1、genrsa：生成私钥
+2、rsa：生成公钥，公钥操作
+3、pkcs8：格式转换
+用法：pkcs8 可选项
+-in： 要输入的文件
+-inform 指定输入文件的格式（DER或者PEM）
+-outform： 指定输出文件的格式（DER或者PEM）
+-out：将输出的内容保存到的文件
+-topk8：输出一个pkcs8文件
+示例：
+	私钥格式转换：
+		pkcs8 -topk8 -inform DER/PEM -in prifile -outform PEM/DER -out prifile1 -nocrypt
+	公钥：
+		rsa -inform DER/PEM -in prifile -pubout -outform PEM/DER -out pubfile
+
+注意：commands -help 查看具体命令的用法
