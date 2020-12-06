@@ -1,0 +1,51 @@
+12月4日下午3班课程笔记
+@author：于洪伟
+
+1、比特币的命令：
+
+
+2、Java原生项目的库依赖：
+① 准备jar包
+② 创建一个lib目录
+③ 将jar包放入到lib目录中
+④ 选中jar包，右键，选择“Add as Library”
+
+maven：项目的依赖和构建工具
+	配置文件：pom.xml文件是进行库依赖配置的文件
+
+3、RPC通信
+① rpcuser
+② rpcpassword
+③ port
+④ ip
+⑤ reqid：请求id
+⑥ method：具体请求的方法或者功能
+⑦ data：携带的参数
+   
+   map(内存）: key   value
+   		     height  1  
+   		     txid   9f2b
+   =》序列化以后才能传输
+   => JSON格式:
+   			{
+   			   "height":1,
+   			   "txid":"9f2b"
+   			}
+
+=》制定一套通信规范，统称为RPC协议:
+JSON-RPC协议的标准:
+{
+	"Authorization"：做权限认证使用,
+	"id"：请求id,请求的唯一编号,
+	"jsonrpc"：json-rpc协议的版本,
+	"method"：具体请求的功能和方法,
+	"params"：携带的参数，json格式,
+}
+
+4、JSON序列化和反序列化练习
+
+
+
+
+
+

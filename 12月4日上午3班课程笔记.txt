@@ -1,0 +1,25 @@
+12月4日上午3班课程笔记
+@author:于洪伟
+
+
+1、比特币的命令：
+getblockcount：获取当前节点同步到的区块的总数
+getblockhash height： 获取特定高度区块的hash，比如
+	getblockhash 0,查看创世区块的hash
+		结果：000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f
+
+getblock "blockhash"：通过特定区块hash值获取对应的区块信息
+	以json格式输出对应区块的信息
+
+getbestblockhash ：获取当前节点最新区块的hash值
+getblockchaininfo ：获取当前节点所在链的信息
+getdifficulty： 返回当前节点挖矿难度
+交易：
+getrawtransaction "txid"：根据交易id获取原始交易的信息，返回十六进制数据
+钱包：
+getnewaddress：生成一个新的比特币的地址
+
+help：查看所有的命令说明
+help command：查看某个命令具体的用法
+
+2、RPC服务
