@@ -1,0 +1,55 @@
+12月7日下午3班课程笔记
+@author：于洪伟
+
+1、比特币命令回顾：
+getbestblockhash
+getblockcount
+新建一个交易：createrawtransaction
+签名一笔交易：signrawtransaction
+发送一笔交易：sendrawtransaction
+获取交易：getrawtransaction "txid"
+获取某个区块hash: getblockhash height
+获取某个区块信息：getblock hash
+
+2、RPC通信协议：
+json-rpc：
+{
+	"id"："请求唯一的id",
+	"jsonrpc"："rpc协议的版本",
+	"method"："要调用的rpc的功能或者方法",
+	"params"："携带的参数"
+}
+
+"Authorization"："BASE64(用户名:密码)"，在请求头中进行设置
+
+3、JSON序列化和反序列化：fastjson.jar
+序列化：
+	a、JSONObject object = (JSONObject)JSON.toJSON(对象);  
+	b、JSONObject object = new JSONObject(); 
+	   object.put(属性名,属性值)
+	   object.toJSONString();
+反序列化：
+	a、XXXX object = JSON.parseObject(string, xxx.class);
+
+数组：JSONArray
+
+4、逻辑实现：
+① 准备要发起的rpc请求的数据：json数据格式
+	a、fastjson
+	b、JSON、JSONObject
+② 发起一个http请求,将准备好的json数据发送到rpc服务端
+	URL url = new URL("http://ip:port")
+
+③ 等待rpc相应，接收http响应
+④ 从响应里面取出数据，将数据进行解析
+⑤ 使用解析后的数据,执行相应的业务逻辑
+
+
+
+addHeader(属性名，属性值)
+Map
+AUTHORIZED
+authorized：未认证的，未授权的
+
+
+
