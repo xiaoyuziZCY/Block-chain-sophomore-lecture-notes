@@ -1,0 +1,49 @@
+12月16日上午3班课程笔记
+@author：于洪伟
+
+1、数字密钥、比特币地址、数字签名
+① 数字密钥是由私钥和公钥组成的一对秘钥，私钥随机生成，一个私钥对一个公钥
+② 比特币网络中，比特币地址用于“抽象”代表收款方，用于方便结算
+③ 一个公钥经过变换计算，对应生成一个比特币地址
+④ 数字签名用以证明消息(交易)的所有者的所有权
+⑤ 在进行交易转账时，使用私钥对交易进行计算，生成签名摘要
+⑥ 交易的验证者可以使用公钥对数字签名进行验签
+
+2、比特币地址的生成
+原理：椭圆曲线加密算法，ECC
+
+过程：
+① 私钥 -> 公钥 -> sh256 -> ripemd160(20字节)
+
+② 添加版本号   versionRipemd160 = version + ripemd160
+
+③ 计算校验位:
+	a、 hash1 = sha256(versionRipemd160)
+	b、 hash2 = sha256(hash1)
+	c、 check = 取hash2的前4个字节
+④ 地址拼接： addBytes = versionRipemd160 + check
+	
+⑤ 形式变换：base58编码
+	add = base58(addBytes)
+
+3、校验比特币地址是否有效
+原理：利用校验位进行校验检查
+
+过程：
+① 对地址base58解码：deAddBytes = decode(add)
+
+② 取后4位作为校验位：
+	check2 = deAddBytes[后4个字节]
+③ 双hash计算:
+    a、deAddBytesExpelCheck =  获取 地址反编码 去除后四字节 以后的内容
+    b、deHash1 = sha256(deAddBytesExpelCheck)
+    c、deHash2 = sha256(deHash1)
+④ 取前4个字节
+	deCheck = deHash2[前四个字节]
+
+⑤ 将check2 与deCheck进行比较
+	a、如果两者相等, 说明地址有效
+	b、如果两者不相等，说明地址无效
+
+1KkH3oJN4snnJv3ZkTXsuoCSxdHQRCkGBS
+1KkH3oJN4snnJv3ZkTXsuoCSxdHQRCkGBs

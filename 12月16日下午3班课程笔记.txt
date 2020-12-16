@@ -1,0 +1,30 @@
+12月16日下午3班课程笔记
+@author：于洪伟
+
+1、校验比特币地址是否有效：16Nzuh8Nh78fxCCZgnJ8zQa7kzepEuUBh
+过程：
+① 对地址base58解码：deAddBytes = decode(add)
+
+② 取后4位作为校验位：
+	check2 = deAddBytes[后4个字节]
+③ 双hash计算:
+    a、deAddBytesExpelCheck =  获取 地址反编码 去除后四字节 以后的内容
+    b、deHash1 = sha256(deAddBytesExpelCheck)
+    c、deHash2 = sha256(deHash1)
+④ 取前4个字节
+	deCheck = deHash2[前四个字节]
+
+⑤ 将check2 与deCheck进行比较
+	a、如果两者相等, 说明地址有效
+	b、如果两者不相等，说明地址无效
+
+2、比特币地址生成及校验的封装
+CheckAddress
+
+作业：
+① 自己封装一套比特币地址生成和校验的算法
+② 把Go语言的代码 翻译成 Java语言
+
+
+
+
