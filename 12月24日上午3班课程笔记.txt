@@ -1,0 +1,63 @@
+12月24日上午3班课程笔记
+@author：于洪伟
+
+1、多人协作开发流程
+多人协作的场景：小组开发，项目开发
+成员：A、B
+
+A：初始化项目
+B：用u盘复制一份代码到自己的电脑
+B：自己开发
+B: 开发完毕,用u盘拷贝代码到A电脑
+A: 将两份代码手动合并
+	①: AB操作的是不同的文件，文件放在一起即可
+	②: AB均操作了同一个文件。需要将该文件重新梳理，一行一行确定代码内容 
+
+代码管理工具：管理代码，多人协作，代码版本管理，权限等
+	SVN(乌龟)、Git
+
+代码服务器：存放所有人的代码的服务器
+
+Github（gitlab）：当做代码服务器
+
+2、基于Github的公开仓库进行多人协作开发：
+成员：A（主开发）、B
+
+①A作为主程，在github上创建一个仓库
+	右上角 -> + -> new repository -> 仓库名字
+②A在本地创建项目（goland、idea）
+③打开开发工具中的terminal,使用git命令初始化仓库，及提交，与远端仓库建立联系：
+	git init
+	git status
+	git add 
+	git commit -m " first commit "
+	git remote add origin https://github.com/yuxinburen/multicode03.git
+④A将写好的代码使用git命令提交到建立了联系的远端仓库
+	git push -u origin master
+⑤A刷新浏览器github仓库页面，发现代码已经上传到仓库中
+
+⑥A邀请成员B进入到仓库项目的维护中：
+	仓库 —> settings -> Manage access -> Invite a collaborator —> B成员的github账户名或者github注册邮箱 -> Add...
+⑦成员B进入邮箱, 点击邀请链接，同意加入到仓库开发
+⑧成员B进入到github上的仓库主页，拉取仓库代码。
+	使用git clone https://github.com/yuxinburen/multicode03.git 将仓库下载自己本地
+⑨成员B在获取到的仓库代码上进行代码功能开发
+	git branch yangyangdeyi
+	git checkout yangyangdeyi
+	修改代码文件
+	git status(有红色的文件列表)
+	git add .
+	git commit -m "yangyangdeyi's modify"
+10、git push origin yangyangdeyi
+	现象：浏览器仓库会有两个分支：master、yangyangdeyi
+11、成员A负责将成员B提交的分支代码合并到master分支上
+	git checkout master
+	git merge remotes/origin/yangyangdeyi
+	cat main.go(看到变化)
+12、
+
+
+
+
+
+
